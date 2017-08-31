@@ -18,7 +18,7 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
-app.get('/example', function(request, response) {  
+app.post('/example', function(request, response) {  
 	const Expo = require('expo-server-sdk');
 
 	console.log(response)
