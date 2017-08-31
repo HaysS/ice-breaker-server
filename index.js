@@ -75,7 +75,7 @@ app.listen(app.get('port'), function(err) {
     return console.log('something bad happened', err)
   }
 
-  firebase.initializeApp(firebaseConfig)
+  // firebase.initializeApp(firebaseConfig)
 
   console.log("Node app is running at localhost:" + app.get('port'))
 })
