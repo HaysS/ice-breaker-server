@@ -4,11 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./dist/app/index.js",
+    "build": "babel app/*.js -d dist"
   },
   "author": "E. Hays Stanford",
   "license": "ISC",
   "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
     "expo-server-sdk": "^2.3.1",
     "express": "^4.15.4",
     "firebase": "^4.3.0",
