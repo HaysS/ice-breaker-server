@@ -55,7 +55,7 @@ app.post('/example', function(request, response) {
 	// compressed).
 	const chunks = expo.chunkPushNotifications(messages);
 
-	(async ()=> {
+	(async function() {
 	  // Send the chunks to the Expo push notification service. There are
 	  // different strategies you could use. A simple one is to send one chunk at a
 	  // time, which nicely spreads the load out over time:
