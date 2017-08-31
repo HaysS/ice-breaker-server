@@ -20,7 +20,7 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
-app.post('/example', function(request, response) {  
+app.post('/notify-message', function(request, response) {  
 	const Expo = require('expo-server-sdk');
 
 	// Create a new Expo SDK client

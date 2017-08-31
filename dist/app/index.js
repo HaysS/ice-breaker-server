@@ -20,7 +20,7 @@ app.get('/',function(request,response){
 response.send('Hello World!');
 });
 
-app.post('/example',function(request,response){var _this=this;
+app.post('/notify-message',function(request,response){var _this=this;
 var Expo=require("expo-server-sdk");
 
 
