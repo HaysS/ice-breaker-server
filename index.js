@@ -21,8 +21,6 @@ app.get('/', function(request, response) {
 app.post('/example', function(request, response) {  
 	const Expo = require('expo-server-sdk');
 
-	console.log(response)
-
 	// Create a new Expo SDK client
 	const expo = new Expo();
 
