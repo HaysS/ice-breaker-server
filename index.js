@@ -70,7 +70,7 @@ app.get('/', function(request, response) {
 // 	})();
 // })
 
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), function(err) {
   if (err) {
     return console.log('something bad happened', err)
   }
