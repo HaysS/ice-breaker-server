@@ -18,6 +18,20 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
+async function sendChunks(chunks) {
+	  // Send the chunks to the Expo push notification service. There are
+	  // different strategies you could use. A simple one is to send one chunk at a
+	  // time, which nicely spreads the load out over time:
+	  for (const chunk of chunks) {
+	    try {
+	      var receipts = await expo.sendPushNotificationsAsync(chunk);
+	      console.log(receipts);
+	    } catch (error) {
+	      console.error(error);
+	    }
+	  }
+	}
+
 app.post('/example', function(request, response) {  
 	const Expo = require('expo-server-sdk');
 
@@ -55,19 +69,7 @@ app.post('/example', function(request, response) {
 	// compressed).
 	const chunks = expo.chunkPushNotifications(messages);
 
-	(async function() {
-	  // Send the chunks to the Expo push notification service. There are
-	  // different strategies you could use. A simple one is to send one chunk at a
-	  // time, which nicely spreads the load out over time:
-	  for (const chunk of chunks) {
-	    try {
-	      var receipts = await expo.sendPushNotificationsAsync(chunk);
-	      console.log(receipts);
-	    } catch (error) {
-	      console.error(error);
-	    }
-	  }
-	})();
+	(sendChunks(chunks))();
 })
 
 app.listen(app.get('port'), function(err) {
