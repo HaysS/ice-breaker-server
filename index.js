@@ -2,11 +2,24 @@ const express = require('express')
 const app = express()  
 const port = 3000
 
+const FirebaseAPI = require('./FirebaseAPI')
+const firebase = require('firebase')
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBSfQ2Ux-vZWAcpmjdhCL47Gh7q0HBIpag",
+  databaseURL: "https://ice-breaker-ad9a9.firebaseio.com",
+  storageBucket: "ice-breaker-ad9a9.appspot.com",
+} 
+
 app.get('/', (request, response) => {  
 	const Expo = require('expo-server-sdk');
 
+	console.log(response)
+
 	// Create a new Expo SDK client
 	const expo = new Expo();
+
+	// FirebaseAPI.getUser('asdfsadf')
 
 	// Create the messages that you want to send to clents
 	const messages = [];
@@ -37,7 +50,7 @@ app.get('/', (request, response) => {
 	// compressed).
 	const chunks = expo.chunkPushNotifications(messages);
 
-	(async () => {
+	(async ()=> {
 	  // Send the chunks to the Expo push notification service. There are
 	  // different strategies you could use. A simple one is to send one chunk at a
 	  // time, which nicely spreads the load out over time:
@@ -52,10 +65,16 @@ app.get('/', (request, response) => {
 	})();
 })
 
+app.get('/example', (request, response) => {  
+	console.log('honestly, my penis is huge')
+})
+
 app.listen(port, (err) => {  
   if (err) {
     return console.log('something bad happened', err)
   }
+
+  firebase.initializeApp(firebaseConfig)
 
   console.log(`server is listening on ${port}`)
 })
