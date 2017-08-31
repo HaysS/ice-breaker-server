@@ -79,16 +79,16 @@ app.listen(app.get('port'), function() {
   console.log("Node app is running at localhost:" + app.get('port'))
 })
 
-app.get('/example', (request, response) => {  
-	console.log('honestly, my penis is huge')
-})
+// app.get('/example', (request, response) => {  
+// 	console.log('honestly, my penis is huge')
+// })
 
-app.listen(port, (err) => {  
-  if (err) {
-    return console.log('something bad happened', err)
-  }
+// app.listen(port, (err) => {  
+//   if (err) {
+//     return console.log('something bad happened', err)
+//   }
 
-  firebase.initializeApp(firebaseConfig)
+//   firebase.initializeApp(firebaseConfig)
 
-  console.log(`server is listening on ${port}`)
-})
+//   console.log(`server is listening on ${port}`)
+// })
