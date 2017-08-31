@@ -64,9 +64,10 @@ app.post('/notify-message', function(request, response) {
 	  for (const chunk of chunks) {
 	    try {
 	      var receipts = await expo.sendPushNotificationsAsync(chunk);
-	      console.log(receipts);
+	      console.log(repsonse.body)
+	      return console.log(receipts);
 	    } catch (error) {
-	      console.error(error);
+	      return console.error(error);
 	    }
 	  }
 	})();
