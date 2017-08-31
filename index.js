@@ -3,13 +3,13 @@ var express = require('express')
 var app = express()
 
 // const FirebaseAPI = require('./FirebaseAPI')
-// const firebase = require('firebase')
+const firebase = require('firebase')
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyBSfQ2Ux-vZWAcpmjdhCL47Gh7q0HBIpag",
-//   databaseURL: "https://ice-breaker-ad9a9.firebaseio.com",
-//   storageBucket: "ice-breaker-ad9a9.appspot.com",
-// } 
+const firebaseConfig = {
+  apiKey: "AIzaSyBSfQ2Ux-vZWAcpmjdhCL47Gh7q0HBIpag",
+  databaseURL: "https://ice-breaker-ad9a9.firebaseio.com",
+  storageBucket: "ice-breaker-ad9a9.appspot.com",
+} 
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
@@ -75,7 +75,7 @@ app.listen(app.get('port'), function(err) {
     return console.log('something bad happened', err)
   }
 
-  // firebase.initializeApp(firebaseConfig)
+  firebase.initializeApp(firebaseConfig)
 
   console.log("Node app is running at localhost:" + app.get('port'))
 })
