@@ -11,7 +11,6 @@ const firebaseConfig = {
   storageBucket: "ice-breaker-ad9a9.appspot.com",
 } 
 
-
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
@@ -19,8 +18,7 @@ app.get('/', function(request, response) {
   response.send('Hello World!')
 })
 
-
-app.get('/example', (request, response) => {  
+app.get('/example', function(request, response) {  
 	const Expo = require('expo-server-sdk');
 
 	console.log(response)
@@ -83,16 +81,3 @@ app.listen(app.get('port'), function() {
 
   console.log("Node app is running at localhost:" + app.get('port'))
 })
-
-// app.get('/example', (request, response) => {  
-// 	console.log('honestly, my penis is huge')
-// })
-
-// app.listen(port, (err) => {  
-//   if (err) {
-//     return console.log('something bad happened', err)
-//   }
-
-
-//   console.log(`server is listening on ${port}`)
-// })
