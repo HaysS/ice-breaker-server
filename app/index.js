@@ -65,12 +65,12 @@ app.post('/notify-message', function(request, response) {
 	      var receipts = await expo.sendPushNotificationsAsync(chunk);
 	      console.log(request.body)
 
-	      res.send()
+	      response.send()
 	      
 	      return console.log(receipts);
 	    } catch (error) {
-	      res.send()
-	    	
+	      response.send()
+
 	    	
 	      return console.error(error);
 	    }

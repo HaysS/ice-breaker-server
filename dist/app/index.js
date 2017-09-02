@@ -65,11 +65,11 @@ chunks,_isArray=Array.isArray(_iterator),_i=0,_iterator=_isArray?_iterator:_iter
 expo.sendPushNotificationsAsync(chunk));case 15:receipts=_context.sent;
 console.log(request.body);
 
-res.send();return _context.abrupt("return",
+response.send();return _context.abrupt("return",
 
 console.log(receipts));case 21:_context.prev=21;_context.t0=_context["catch"](12);
 
-res.send();return _context.abrupt("return",
+response.send();return _context.abrupt("return",
 
 
 console.error(_context.t0));case 25:_context.next=1;break;case 27:case"end":return _context.stop();}}},null,_this,[[12,21]]);})();
