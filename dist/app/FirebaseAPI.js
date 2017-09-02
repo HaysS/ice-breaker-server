@@ -12,10 +12,10 @@ return firebase.database().ref().child('users').child(key).once('value').
 then(function(snap){return snap.val();});
 };
 
-function getUserCb(key,func){
+_exports.getUserCb=function(key,func){
 firebase.database().ref().child('users').child(key).once('value').
 then(function(snap){return func(snap.val());});
-}
+};
 
 function getUsersCb(keyArray,func){
 firebase.database().ref().child('users').once('value').

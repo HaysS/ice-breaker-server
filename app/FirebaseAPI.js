@@ -12,7 +12,7 @@ exports.getUser = function(key) {
     .then((snap) => snap.val())
 }
 
-function getUserCb(key, func) {
+exports.getUserCb = function(key, func) {
   firebase.database().ref().child('users').child(key).once('value')
     .then((snap) => func(snap.val()))
 }
