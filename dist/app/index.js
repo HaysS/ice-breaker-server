@@ -44,7 +44,7 @@ console.error("Push token "+pushToken+" is not a valid Expo push token");
 continue;
 }
 
-var bodyString=request.body.name+' | "'+request.body.message+'"';
+var bodyString=request.body.senderFirstName+' | "'+request.body.message+'"';
 
 
 messages.push({

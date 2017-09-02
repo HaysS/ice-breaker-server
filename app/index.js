@@ -44,7 +44,7 @@ app.post('/notify-message', function(request, response) {
 	    continue;
 	  }
 
-	  const bodyString = request.body.name+' | "'+request.body.message+'"'
+	  const bodyString = request.body.senderFirstName+' | "'+request.body.message+'"'
 
 	  // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
 	  messages.push({
