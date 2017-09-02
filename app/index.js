@@ -34,27 +34,22 @@ app.post('/notify-message', function(request, response) {
 	// Create the messages that you want to send to clents
 	const messages = [];
 
-	FirebaseAPI.getUserCb(request.body.receiverUid, (user) => {
-	    // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]
-	    if('pushToken' in user) {
-	    	// Check that all your push tokens appear to be valid Expo push tokens
-		    if (!Expo.isExpoPushToken(user.pushToken)) {
-		      console.log(`Push token ${user.pushToken} is not a valid Expo push token`);
-		    } else {
-		    	console.log('Sending notification to push token: '+user.pushToken)
-		    }
+	// Check that all your push tokens appear to be valid Expo push tokens
+    if (!Expo.isExpoPushToken(user.pushToken)) {
+      console.log(`Push token ${user.pushToken} is not a valid Expo push token`);
+    } else {
+    	console.log('Sending notification to push token: '+user.pushToken)
+    }
 
-		    const bodyString = request.body.senderFirstName+' | "'+request.body.message+'"'
+    const bodyString = request.body.senderFirstName+' | "'+request.body.message+'"'
 
-		    // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
-		    messages.push({
-		      to: user.pushToken,
-		      sound: 'default',
-		      body: bodyString,
-		      data: {text: bodyString} ,
-		    })
-	    }	
-	})
+    // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
+    messages.push({
+      to: request.body.receiverPushToken,
+      sound: 'default',
+      body: bodyString,
+      data: {text: bodyString} ,
+    })
 
 	// The Expo push notification service accepts batches of notifications so
 	// that you don't need to send 1000 requests to send 1000 notifications. We

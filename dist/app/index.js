@@ -34,9 +34,6 @@ var expo=new Expo();
 
 var messages=[];
 
-FirebaseAPI.getUserCb(request.body.receiverUid,function(user){
-
-if('pushToken'in user){
 
 if(!Expo.isExpoPushToken(user.pushToken)){
 console.log("Push token "+user.pushToken+" is not a valid Expo push token");
@@ -48,13 +45,11 @@ var bodyString=request.body.senderFirstName+' | "'+request.body.message+'"';
 
 
 messages.push({
-to:user.pushToken,
+to:request.body.receiverPushToken,
 sound:'default',
 body:bodyString,
 data:{text:bodyString}});
 
-}
-});
 
 
 
