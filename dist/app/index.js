@@ -51,7 +51,7 @@ messages.push({
 to:pushToken,
 sound:'default',
 body:bodyString,
-data:bodyString});
+data:{text:bodyString}});
 
 }
 

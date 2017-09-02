@@ -51,7 +51,7 @@ app.post('/notify-message', function(request, response) {
 	    to: pushToken,
 	    sound: 'default',
 	    body: bodyString,
-	    data: bodyString ,
+	    data: {text: bodyString} ,
 	  })
 	}
 
