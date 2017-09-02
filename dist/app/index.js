@@ -33,27 +33,28 @@ var expo=new Expo();
 
 
 var messages=[];
-somePushTokens=["ExponentPushToken[fCfeLOMt7wcT1-RC3N5O7Z]"];
 
-for(var _iterator=somePushTokens,_isArray=Array.isArray(_iterator),_i=0,_iterator=_isArray?_iterator:_iterator[typeof Symbol==="function"?Symbol.iterator:"@@iterator"]();;){var _ref;if(_isArray){if(_i>=_iterator.length)break;_ref=_iterator[_i++];}else{_i=_iterator.next();if(_i.done)break;_ref=_i.value;}var pushToken=_ref;
+FirebaseAPI.getUserCb(request.body.receiverUid,function(user){
 
+if('pushToken'in user){
 
-
-if(!Expo.isExpoPushToken(pushToken)){
-console.error("Push token "+pushToken+" is not a valid Expo push token");
-continue;
+if(!Expo.isExpoPushToken(user.pushToken)){
+console.log("Push token "+user.pushToken+" is not a valid Expo push token");
+}else{
+console.log('Sending notification to push token: '+user.pushToken);
 }
 
 var bodyString=request.body.senderFirstName+' | "'+request.body.message+'"';
 
 
 messages.push({
-to:pushToken,
+to:user.pushToken,
 sound:'default',
 body:bodyString,
 data:{text:bodyString}});
 
 }
+});
 
 
 
@@ -62,11 +63,11 @@ data:{text:bodyString}});
 
 var chunks=expo.chunkPushNotifications(messages);
 
-(function _callee(){var _iterator2,_isArray2,_i2,_ref2,chunk,receipts;return regeneratorRuntime.async(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_iterator2=
+(function _callee(){var _iterator,_isArray,_i,_ref,chunk,receipts;return regeneratorRuntime.async(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_iterator=
 
 
 
-chunks,_isArray2=Array.isArray(_iterator2),_i2=0,_iterator2=_isArray2?_iterator2:_iterator2[typeof Symbol==="function"?typeof Symbol==="function"?Symbol.iterator:"@@iterator":"@@iterator"]();case 1:if(!_isArray2){_context.next=7;break;}if(!(_i2>=_iterator2.length)){_context.next=4;break;}return _context.abrupt("break",25);case 4:_ref2=_iterator2[_i2++];_context.next=11;break;case 7:_i2=_iterator2.next();if(!_i2.done){_context.next=10;break;}return _context.abrupt("break",25);case 10:_ref2=_i2.value;case 11:chunk=_ref2;_context.prev=12;_context.next=15;return regeneratorRuntime.awrap(
+chunks,_isArray=Array.isArray(_iterator),_i=0,_iterator=_isArray?_iterator:_iterator[typeof Symbol==="function"?typeof Symbol==="function"?Symbol.iterator:"@@iterator":"@@iterator"]();case 1:if(!_isArray){_context.next=7;break;}if(!(_i>=_iterator.length)){_context.next=4;break;}return _context.abrupt("break",25);case 4:_ref=_iterator[_i++];_context.next=11;break;case 7:_i=_iterator.next();if(!_i.done){_context.next=10;break;}return _context.abrupt("break",25);case 10:_ref=_i.value;case 11:chunk=_ref;_context.prev=12;_context.next=15;return regeneratorRuntime.awrap(
 
 expo.sendPushNotificationsAsync(chunk));case 15:receipts=_context.sent;
 console.log(request.body);return _context.abrupt("return",
