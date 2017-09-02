@@ -29,8 +29,6 @@ app.post('/notify-message', function(request, response) {
 	// Create a new Expo SDK client
 	const expo = new Expo();
 
-	// FirebaseAPI.getUser('asdfsadf')
-
 	// Create the messages that you want to send to clents
 	const messages = [];
 
@@ -38,7 +36,7 @@ app.post('/notify-message', function(request, response) {
     if (!Expo.isExpoPushToken(request.body.receiverPushToken)) {
       console.log(`Push token ${request.body.receiverPushToken} is not a valid Expo push token`);
     } else {
-    	console.log('Sending notification to push token: '+user.pushToken)
+    	console.log('Sending notification to push token: '+request.body.receiverPushToken)
     }
 
     const bodyString = request.body.senderFirstName+' | "'+request.body.message+'"'

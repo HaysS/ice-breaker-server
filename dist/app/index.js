@@ -30,15 +30,13 @@ var Expo=require("expo-server-sdk");
 var expo=new Expo();
 
 
-
-
 var messages=[];
 
 
 if(!Expo.isExpoPushToken(request.body.receiverPushToken)){
 console.log("Push token "+request.body.receiverPushToken+" is not a valid Expo push token");
 }else{
-console.log('Sending notification to push token: '+user.pushToken);
+console.log('Sending notification to push token: '+request.body.receiverPushToken);
 }
 
 var bodyString=request.body.senderFirstName+' | "'+request.body.message+'"';
