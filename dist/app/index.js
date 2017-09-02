@@ -50,8 +50,8 @@ var bodyString=request.body.name+': "'+request.body.message+'"';
 messages.push({
 to:pushToken,
 sound:'default',
-body:bodyString});
-
+body:bodyString,
+data:{text:bodyString}});
 
 }
 
