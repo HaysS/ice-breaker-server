@@ -48,7 +48,7 @@ app.post('/notify-message', function(request, response) {
 	  messages.push({
 	    to: pushToken,
 	    sound: 'default',
-	    body: 'This is a test notification',
+	    body: 'Welcome to Ice Breakerr!',
 	    data: { withSome: 'data' },
 	  })
 	}
@@ -67,7 +67,7 @@ app.post('/notify-message', function(request, response) {
 	  for (const chunk of chunks) {
 	    try {
 	      var receipts = await expo.sendPushNotificationsAsync(chunk);
-	      console.log(request)
+	      console.log(request.body)
 	      return console.log(receipts);
 	    } catch (error) {
 	      return console.error(error);
