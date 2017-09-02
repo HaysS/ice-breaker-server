@@ -60,13 +60,19 @@ var chunks=expo.chunkPushNotifications(messages);
 
 
 
-chunks,_isArray=Array.isArray(_iterator),_i=0,_iterator=_isArray?_iterator:_iterator[typeof Symbol==="function"?typeof Symbol==="function"?Symbol.iterator:"@@iterator":"@@iterator"]();case 1:if(!_isArray){_context.next=7;break;}if(!(_i>=_iterator.length)){_context.next=4;break;}return _context.abrupt("break",25);case 4:_ref=_iterator[_i++];_context.next=11;break;case 7:_i=_iterator.next();if(!_i.done){_context.next=10;break;}return _context.abrupt("break",25);case 10:_ref=_i.value;case 11:chunk=_ref;_context.prev=12;_context.next=15;return regeneratorRuntime.awrap(
+chunks,_isArray=Array.isArray(_iterator),_i=0,_iterator=_isArray?_iterator:_iterator[typeof Symbol==="function"?typeof Symbol==="function"?Symbol.iterator:"@@iterator":"@@iterator"]();case 1:if(!_isArray){_context.next=7;break;}if(!(_i>=_iterator.length)){_context.next=4;break;}return _context.abrupt("break",27);case 4:_ref=_iterator[_i++];_context.next=11;break;case 7:_i=_iterator.next();if(!_i.done){_context.next=10;break;}return _context.abrupt("break",27);case 10:_ref=_i.value;case 11:chunk=_ref;_context.prev=12;_context.next=15;return regeneratorRuntime.awrap(
 
 expo.sendPushNotificationsAsync(chunk));case 15:receipts=_context.sent;
-console.log(request.body);return _context.abrupt("return",
-console.log(receipts));case 20:_context.prev=20;_context.t0=_context["catch"](12);return _context.abrupt("return",
+console.log(request.body);
 
-console.error(_context.t0));case 23:_context.next=1;break;case 25:case"end":return _context.stop();}}},null,_this,[[12,20]]);})();
+res.send();return _context.abrupt("return",
+
+console.log(receipts));case 21:_context.prev=21;_context.t0=_context["catch"](12);
+
+res.send();return _context.abrupt("return",
+
+
+console.error(_context.t0));case 25:_context.next=1;break;case 27:case"end":return _context.stop();}}},null,_this,[[12,21]]);})();
 
 
 
