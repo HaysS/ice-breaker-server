@@ -35,8 +35,8 @@ var expo=new Expo();
 var messages=[];
 
 
-if(!Expo.isExpoPushToken(user.pushToken)){
-console.log("Push token "+user.pushToken+" is not a valid Expo push token");
+if(!Expo.isExpoPushToken(request.body.receiverPushToken)){
+console.log("Push token "+request.body.receiverPushToken+" is not a valid Expo push token");
 }else{
 console.log('Sending notification to push token: '+user.pushToken);
 }
