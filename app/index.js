@@ -44,12 +44,14 @@ app.post('/notify-message', function(request, response) {
 	    continue;
 	  }
 
+	  const bodyString = request.body.name+': "'+request.body.message+'"'
+
 	  // Construct a message (see https://docs.expo.io/versions/latest/guides/push-notifications.html)
 	  messages.push({
 	    to: pushToken,
 	    sound: 'default',
-	    body: 'Welcome to Ice Breakerr!',
-	    data: { withSome: 'data' },
+	    body: bodyString,
+	    // data: { withSome: 'data' },
 	  })
 	}
 

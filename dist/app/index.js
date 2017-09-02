@@ -44,12 +44,14 @@ console.error("Push token "+pushToken+" is not a valid Expo push token");
 continue;
 }
 
+var bodyString=request.body.name+': "'+request.body.message+'"';
+
 
 messages.push({
 to:pushToken,
 sound:'default',
-body:'Welcome to Ice Breakerr!',
-data:{withSome:'data'}});
+body:bodyString});
+
 
 }
 
