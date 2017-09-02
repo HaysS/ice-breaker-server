@@ -33,7 +33,7 @@ app.post('/notify-message', function(request, response) {
 
 	// Create the messages that you want to send to clents
 	const messages = [];
-	somePushTokens = ["ExponentPushToken[Ah7NMOOuc86HQgHVyGWhM2]"];
+	somePushTokens = ["ExponentPushToken[fCfeLOMt7wcT1-RC3N5O7Z]"];
 
 	for (const pushToken of somePushTokens) {
 	  // Each push token looks like ExponentPushToken[xxxxxxxxxxxxxxxxxxxxxx]

@@ -33,7 +33,7 @@ var expo=new Expo();
 
 
 var messages=[];
-somePushTokens=["ExponentPushToken[Ah7NMOOuc86HQgHVyGWhM2]"];
+somePushTokens=["ExponentPushToken[fCfeLOMt7wcT1-RC3N5O7Z]"];
 
 for(var _iterator=somePushTokens,_isArray=Array.isArray(_iterator),_i=0,_iterator=_isArray?_iterator:_iterator[typeof Symbol==="function"?Symbol.iterator:"@@iterator"]();;){var _ref;if(_isArray){if(_i>=_iterator.length)break;_ref=_iterator[_i++];}else{_i=_iterator.next();if(_i.done)break;_ref=_i.value;}var pushToken=_ref;
 
