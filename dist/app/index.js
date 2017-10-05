@@ -78,6 +78,60 @@ console.error(_context.t0));case 25:_context.next=1;break;case 27:case"end":retu
 
 });
 
+app.post('/notify-match',function(request,response){var _this2=this;
+var Expo=require("expo-server-sdk");
+
+
+var expo=new Expo();
+
+
+var messages=[];
+
+
+if(!Expo.isExpoPushToken(request.body.receiverPushToken)){
+console.log("Push token "+request.body.receiverPushToken+" is not a valid Expo push token");
+}else{
+console.log('Sending notification to push token: '+request.body.receiverPushToken);
+}
+
+var bodyString='You just matched with '+request.body.senderFirstName+'!';
+
+messages.push({
+to:request.body.receiverPushToken,
+sound:'default',
+body:bodyString,
+data:{text:bodyString}});
+
+
+
+
+
+
+
+var chunks=expo.chunkPushNotifications(messages);
+
+(function _callee2(){var _iterator2,_isArray2,_i2,_ref2,chunk,receipts;return regeneratorRuntime.async(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_iterator2=
+
+
+
+chunks,_isArray2=Array.isArray(_iterator2),_i2=0,_iterator2=_isArray2?_iterator2:_iterator2[typeof Symbol==="function"?typeof Symbol==="function"?Symbol.iterator:"@@iterator":"@@iterator"]();case 1:if(!_isArray2){_context2.next=7;break;}if(!(_i2>=_iterator2.length)){_context2.next=4;break;}return _context2.abrupt("break",27);case 4:_ref2=_iterator2[_i2++];_context2.next=11;break;case 7:_i2=_iterator2.next();if(!_i2.done){_context2.next=10;break;}return _context2.abrupt("break",27);case 10:_ref2=_i2.value;case 11:chunk=_ref2;_context2.prev=12;_context2.next=15;return regeneratorRuntime.awrap(
+
+expo.sendPushNotificationsAsync(chunk));case 15:receipts=_context2.sent;
+console.log(request.body);
+
+response.send();return _context2.abrupt("return",
+
+console.log(receipts));case 21:_context2.prev=21;_context2.t0=_context2["catch"](12);
+
+response.send();return _context2.abrupt("return",
+
+
+console.error(_context2.t0));case 25:_context2.next=1;break;case 27:case"end":return _context2.stop();}}},null,_this2,[[12,21]]);})();
+
+
+
+});
+
 app.listen(app.get('port'),function(err){
 if(err){
 return console.log('something bad happened',err);
