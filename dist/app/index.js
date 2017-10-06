@@ -1,9 +1,14 @@
 require("babel-core/register");
 require("babel-polyfill");
 
+var keyPublishable=process.env.PUBLISHABLE_KEY;
+var keySecret=process.env.SECRET_KEY;
+var FIREBASE_SECRET="uuiAa6CYs1FOAjEAFgHM8VWais3uZKhqIbHb336R";
+
 var express=require("express");
 var app=express();
 var bodyParser=require("body-parser");
+var path=require("path");
 
 var FirebaseAPI=require('./FirebaseAPI');
 var firebase=require("firebase");
@@ -14,13 +19,46 @@ databaseURL:"https://ice-breaker-ad9a9.firebaseio.com",
 storageBucket:"ice-breaker-ad9a9.appspot.com"};
 
 
+var stripe=require("stripe")(keySecret);
+
+app.set("view engine","pug");
+app.use(require("body-parser").urlencoded({extended:false}));
+
+
 app.set('port',process.env.PORT||5000);
 app.use(express.static(__dirname+'/public'));
 
 app.use(bodyParser.json());
 
-app.get('/',function(request,response){
-response.send('Hello World!');
+app.get('/view-pictures-payment',function(request,response){
+response.render('index',{title:'Hey',message:'Hello there!'});
+});
+
+app.get("/pay",function(req,res){
+
+var paymentText="See Jesus's pictures for $5.00!";
+res.render("index.pug",{keyPublishable:keyPublishable,paymentText:paymentText,userUid:"8pAIpFuLvSQBXA8lvedYkhHpbL13",profileUid:"FqTZ3p5G0ncdlETzqvNqwwjwMQF2"});
+});
+
+app.post("/charge",function(req,res){
+var amount=500;
+
+console.log("User with UID:",req.body.userUid,"Paid for pictures of:",req.body.profileUid);
+
+FirebaseAPI.setPaid(req.body.userUid,req.body.profileUid);
+
+stripe.customers.create({
+email:req.body.stripeEmail,
+source:req.body.stripeToken}).
+
+then(function(customer){return(
+stripe.charges.create({
+amount:amount,
+description:"Sample Charge",
+currency:"usd",
+customer:customer.id}));}).
+
+then(function(charge){return res.render("charge.pug");});
 });
 
 app.post('/notify-message',function(request,response){var _this=this;

@@ -1,9 +1,14 @@
 require("babel-core/register");
 require("babel-polyfill");
 
+const keyPublishable = process.env.PUBLISHABLE_KEY;
+const keySecret = process.env.SECRET_KEY;
+const FIREBASE_SECRET = "uuiAa6CYs1FOAjEAFgHM8VWais3uZKhqIbHb336R"
+
 var express = require('express')
 var app = express()
 const bodyParser = require('body-parser');
+var path = require("path");
 
 const FirebaseAPI = require('./FirebaseAPI')
 const firebase = require('firebase')
@@ -12,16 +17,49 @@ const firebaseConfig = {
   apiKey: "AIzaSyBSfQ2Ux-vZWAcpmjdhCL47Gh7q0HBIpag",
   databaseURL: "https://ice-breaker-ad9a9.firebaseio.com",
   storageBucket: "ice-breaker-ad9a9.appspot.com",
-} 
+}
+
+const stripe = require("stripe")(keySecret);
+
+app.set("view engine", "pug");
+app.use(require("body-parser").urlencoded({extended: false}));
+
 
 app.set('port', (process.env.PORT || 5000))
 app.use(express.static(__dirname + '/public'))
 
 app.use(bodyParser.json());
 
-app.get('/', function(request, response) {
-  response.send('Hello World!')
+app.get('/view-pictures-payment', function(request, response) {
+  response.render('index', { title: 'Hey', message: 'Hello there!' })
 })
+
+app.get("/pay", function(req, res) {
+	//console.log("Buying pictures for " req.body.senderFirstName, req.body.userUid, req.body.profileUid)
+	const paymentText = "See Jesus's pictures for $5.00!"
+  res.render("index.pug", {keyPublishable: keyPublishable, paymentText: paymentText, userUid: "8pAIpFuLvSQBXA8lvedYkhHpbL13", profileUid: "FqTZ3p5G0ncdlETzqvNqwwjwMQF2"})
+})
+
+app.post("/charge", (req, res) => {
+  let amount = 500;
+
+  console.log("User with UID:", req.body.userUid, "Paid for pictures of:", req.body.profileUid)
+
+  FirebaseAPI.setPaid(req.body.userUid, req.body.profileUid)
+
+  stripe.customers.create({
+     email: req.body.stripeEmail,
+    source: req.body.stripeToken
+  })
+  .then(customer =>
+    stripe.charges.create({
+      amount,
+      description: "Sample Charge",
+         currency: "usd",
+         customer: customer.id
+    }))
+  .then(charge => res.render("charge.pug"));
+});
 
 app.post('/notify-message', function(request, response) {  
 	const Expo = require('expo-server-sdk');
@@ -136,11 +174,8 @@ app.listen(app.get('port'), function(err) {
   if (err) {
     return console.log('something bad happened', err)
   }
-
+  
   firebase.initializeApp(firebaseConfig)
 
   console.log("Node app is running at localhost:" + app.get('port'))
 })
-
-
-
