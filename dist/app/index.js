@@ -35,12 +35,18 @@ response.send('Hello there!');
 });
 
 app.get("/pay",function(req,res){
+if(req.body.userUid!=undefined&&res.body.profileUid!=undefined){
 console.log("Buying pictures for ",req.body.senderFirstName,req.body.userUid,req.body.profileUid);
-var paymentText="See Jesus's pictures for $5.00!";
-res.render("index.pug",{keyPublishable:keyPublishable,paymentText:paymentText,userUid:"8pAIpFuLvSQBXA8lvedYkhHpbL13",profileUid:"FqTZ3p5G0ncdlETzqvNqwwjwMQF2"});
+var paymentText="See "+req.body.senderFirstName+"'s pictures for $5.00!";
+res.render("index.pug",{keyPublishable:keyPublishable,paymentText:paymentText,userUid:req.body.userUid,profileUid:req.body.profileUid});
+}else{
+console.log("Payment form failed");
+res.send("Payment form failed");
+}
 });
 
 app.post("/charge",function(req,res){
+if(req.body.userUid!=undefined&&res.body.profileUid!=undefined){
 var amount=500;
 
 console.log("User with UID:",req.body.userUid,"Paid for pictures of:",req.body.profileUid);
@@ -59,6 +65,10 @@ currency:"usd",
 customer:customer.id}));}).
 
 then(function(charge){return res.render("charge.pug");});
+}else{
+console.log("Charge failed");
+res.send("Charge failed");
+}
 });
 
 app.post('/notify-message',function(request,response){var _this=this;

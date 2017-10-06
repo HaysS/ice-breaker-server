@@ -35,30 +35,40 @@ app.get('/', function(request, response) {
 })
 
 app.get("/pay", function(req, res) {
-	console.log("Buying pictures for ", req.body.senderFirstName, req.body.userUid, req.body.profileUid)
-	const paymentText = "See Jesus's pictures for $5.00!"
-  res.render("index.pug", {keyPublishable: keyPublishable, paymentText: paymentText, userUid: "8pAIpFuLvSQBXA8lvedYkhHpbL13", profileUid: "FqTZ3p5G0ncdlETzqvNqwwjwMQF2"})
+	if(req.body.userUid != undefined && res.body.profileUid != undefined) {
+		console.log("Buying pictures for ", req.body.senderFirstName, req.body.userUid, req.body.profileUid)
+		const paymentText = "See "+req.body.senderFirstName+"'s pictures for $5.00!"
+	  	res.render("index.pug", {keyPublishable: keyPublishable, paymentText: paymentText, userUid: req.body.userUid, profileUid: req.body.profileUid})
+	} else {
+		console.log("Payment form failed")
+		res.send("Payment form failed")
+	}
 })
 
 app.post("/charge", (req, res) => {
-  let amount = 500;
+	if(req.body.userUid != undefined && res.body.profileUid != undefined) {
+	  let amount = 500;
 
-  console.log("User with UID:", req.body.userUid, "Paid for pictures of:", req.body.profileUid)
+	  console.log("User with UID:", req.body.userUid, "Paid for pictures of:", req.body.profileUid)
 
-  FirebaseAPI.setPaid(req.body.userUid, req.body.profileUid)
+	  FirebaseAPI.setPaid(req.body.userUid, req.body.profileUid)
 
-  stripe.customers.create({
-     email: req.body.stripeEmail,
-    source: req.body.stripeToken
-  })
-  .then(customer =>
-    stripe.charges.create({
-      amount,
-      description: "Sample Charge",
-         currency: "usd",
-         customer: customer.id
-    }))
-  .then(charge => res.render("charge.pug"));
+	  stripe.customers.create({
+	     email: req.body.stripeEmail,
+	    source: req.body.stripeToken
+	  })
+	  .then(customer =>
+	    stripe.charges.create({
+	      amount,
+	      description: "Sample Charge",
+	         currency: "usd",
+	         customer: customer.id
+	    }))
+	  .then(charge => res.render("charge.pug"));
+	} else {
+		console.log("Charge failed")
+		res.send("Charge failed")
+	}
 });
 
 app.post('/notify-message', function(request, response) {  
