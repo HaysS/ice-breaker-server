@@ -31,11 +31,11 @@ app.use(express.static(__dirname+'/public'));
 app.use(bodyParser.json());
 
 app.get('/',function(request,response){
-response.render('index',{title:'Hey',message:'Hello there!'});
+response.send('Hello there!');
 });
 
 app.get("/pay",function(req,res){
-
+console.log("Buying pictures for ",req.body.senderFirstName,req.body.userUid,req.body.profileUid);
 var paymentText="See Jesus's pictures for $5.00!";
 res.render("index.pug",{keyPublishable:keyPublishable,paymentText:paymentText,userUid:"8pAIpFuLvSQBXA8lvedYkhHpbL13",profileUid:"FqTZ3p5G0ncdlETzqvNqwwjwMQF2"});
 });
