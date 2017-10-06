@@ -30,7 +30,7 @@ app.use(express.static(__dirname+'/public'));
 
 app.use(bodyParser.json());
 
-app.get('/view-pictures-payment',function(request,response){
+app.get('/',function(request,response){
 response.render('index',{title:'Hey',message:'Hello there!'});
 });
 
