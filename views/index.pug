@@ -1,0 +1,14 @@
+html
+  body
+    form(action="/charge", method="post")
+      input(type="hidden", name="userUid", value=userUid)
+      input(type="hidden", name="profileUid", value=profileUid)
+      article
+        label=paymentText
+      script(
+        src="//checkout.stripe.com/v2/checkout.js",
+        class="stripe-button",
+        data-key=keyPublishable,
+        data-locale="auto",
+        data-description="Sample Charge",
+        data-amount="500")
