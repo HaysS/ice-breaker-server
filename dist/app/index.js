@@ -34,15 +34,15 @@ app.get('/',function(request,response){
 response.send('Hello there!');
 });
 
-app.post("/pay",function(req,res){
-if(req.body.userUid!=undefined&&req.body.profileUid!=undefined){
-console.log("Buying pictures for ",req.body.profileFirstName,req.body.userUid,req.body.profileUid);
-var paymentText="See "+req.body.profileFirstName+"'s pictures for $5.00!";
+app.get("/pay",function(req,res){
+
+
+var paymentText="See "+req.body.profileFirstName+"'s pictures for $5.00.";
 res.render("index.pug",{keyPublishable:keyPublishable,paymentText:paymentText,userUid:req.body.userUid,profileUid:req.body.profileUid});
-}else{
-console.log("Payment form failed");
-res.send("Payment form failed");
-}
+
+
+
+
 });
 
 app.post("/charge",function(req,res){
