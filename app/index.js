@@ -34,7 +34,7 @@ app.get('/', function(request, response) {
   response.send('Hello there!')
 })
 
-app.get("/pay", function(req, res) {
+app.post("/pay", function(req, res) {
 	// if(req.body.userUid != undefined && req.body.profileUid != undefined) {
 		// console.log("Buying pictures for ", req.body.profileFirstName, req.body.userUid, req.body.profileUid)
 		const paymentText = "See "+req.body.profileFirstName+"'s pictures for $5.00."
