@@ -37,7 +37,7 @@ response.send('Hello there!');
 app.post("/pay",function(req,res){
 if(req.body.userUid!=undefined&&req.body.profileUid!=undefined){
 
-var paymentText="See "+req.body.profileFirstName+"'s pictures for $5.00.";
+var paymentText="See "+req.body.profileFirstName+"'s pictures for $1.00.";
 res.render("index.pug",{keyPublishable:keyPublishable,paymentText:paymentText,userUid:req.body.userUid,profileUid:req.body.profileUid});
 }else{
 console.log("Payment form failed");
@@ -47,7 +47,7 @@ res.send("Payment form failed");
 
 app.post("/charge",function(req,res){
 if(req.body.userUid!=undefined&&req.body.profileUid!=undefined){
-var amount=500;
+var amount=100;
 
 console.log("User with UID:",req.body.userUid,"Paid for pictures of:",req.body.profileUid);
 
@@ -60,7 +60,7 @@ source:req.body.stripeToken}).
 then(function(customer){return(
 stripe.charges.create({
 amount:amount,
-description:"Sample Charge",
+description:"View Pictures",
 currency:"usd",
 customer:customer.id}));}).
 

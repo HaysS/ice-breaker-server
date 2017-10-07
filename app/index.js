@@ -37,7 +37,7 @@ app.get('/', function(request, response) {
 app.post("/pay", function(req, res) {
 	if(req.body.userUid != undefined && req.body.profileUid != undefined) {
 		// console.log("Buying pictures for ", req.body.profileFirstName, req.body.userUid, req.body.profileUid)
-		const paymentText = "See "+req.body.profileFirstName+"'s pictures for $5.00."
+		const paymentText = "See "+req.body.profileFirstName+"'s pictures for $1.00."
 	  	res.render("index.pug", {keyPublishable: keyPublishable, paymentText: paymentText, userUid: req.body.userUid, profileUid: req.body.profileUid})
 	} else {
 		console.log("Payment form failed")
@@ -47,7 +47,7 @@ app.post("/pay", function(req, res) {
 
 app.post("/charge", (req, res) => {
 	if(req.body.userUid != undefined && req.body.profileUid != undefined) {
-	  let amount = 500;
+	  let amount = 100;
 
 	  console.log("User with UID:", req.body.userUid, "Paid for pictures of:", req.body.profileUid)
 
@@ -60,7 +60,7 @@ app.post("/charge", (req, res) => {
 	  .then(customer =>
 	    stripe.charges.create({
 	      amount,
-	      description: "Sample Charge",
+	      description: "View Pictures",
 	         currency: "usd",
 	         customer: customer.id
 	    }))

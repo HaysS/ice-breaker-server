@@ -10,7 +10,7 @@ html
       div(class='centered')
         div(class='content')
           h1 Ice Breakerr
-          h2(class='prompt') You can see every one of a person's uploaded pictures early by using this form. 
+          h2(class='prompt') You can see a person's uploaded pictures right now by using this form. 
           form(action="/charge", method="post")
             input(type="hidden", name="userUid", value=userUid)
             input(type="hidden", name="profileUid", value=profileUid)
@@ -21,7 +21,7 @@ html
               class="stripe-button",
               data-key=keyPublishable,
               data-locale="auto",
-              data-description="Sample Charge",
-              data-amount="500")
+              data-description="View Pictures",
+              data-amount="100")
       div(class='spacer')
           
