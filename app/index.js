@@ -45,6 +45,20 @@ app.post("/pay", function(req, res) {
 	}
 })
 
+app.get("/test-pay", function(req, res) {
+	const userUid = 'user'
+	const profileUid = 'profile'
+
+	if(userUid != undefined && profileUid != undefined) {
+		// console.log("Buying pictures for ", req.body.profileFirstName, req.body.userUid, req.body.profileUid)
+		const paymentText = "See "+"'s pictures for $1.00."
+	  	res.render("index.pug", {keyPublishable: keyPublishable, paymentText: paymentText, userUid: userUid, profileUid: profileUid})
+	} else {
+		console.log("Payment form failed")
+		res.send("Payment form failed")
+	}
+})
+
 app.post("/charge", (req, res) => {
 	if(req.body.userUid != undefined && req.body.profileUid != undefined) {
 	  let amount = 100;
